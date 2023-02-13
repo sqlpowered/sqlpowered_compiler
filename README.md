@@ -115,7 +115,7 @@ More to follow later...
 |-----------|--------|------|
 | Go lang   | Type safety, performance and relative simplicity | https://go.dev |
 | Postgres | Database with relatively good security profile | https://www.postgresql.org/ |
-| pq | Well established postgres driver, support for extracting arbitrary query results | https://www.postgresql.org/ |
+| pq | Well established postgres driver, support for extracting arbitrary query results | https://github.com/lib/pq |
 
 
 
