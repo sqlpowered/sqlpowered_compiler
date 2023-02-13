@@ -56,12 +56,15 @@ Safety is the main goal. Achieved by applying user roles and general restriction
 |---------------------------|-----------------------------|
 | delete                    | ✓* (where user permissions allow) |
 | where                     | ✓* (mandatory, cannot be omitted, cannot be empty, columns must be permitted) |
+| common table expressions  | ✗ (easier to secure, separation of concerns by query type) |
+| subqueries                | ✗ (easier to secure, separation of concerns by query type) |
 
 | SQL Features in insert    | Supported                   |
 |---------------------------|-----------------------------|
 | insert                    | ✓* (where user permissions allow) |
 | values                    | ✓* (mandatory, cannot be omitted, cannot be empty) |
-
+| common table expressions  | ✗ (easier to secure, separation of concerns by query type) |
+| subqueries                | ✗ (easier to secure, separation of concerns by query type) |
 
 
 | SQL Functions             | Supported                   |
