@@ -57,6 +57,12 @@ Safety is the main goal. Achieved by applying user roles and general restriction
 | delete                    | ✓* (where user permissions allow) |
 | where                     | ✓* (mandatory, cannot be omitted, cannot be empty, columns must be permitted) |
 
+| SQL Features in insert    | Supported                   |
+|---------------------------|-----------------------------|
+| insert                    | ✓* (where user permissions allow) |
+| values                    | ✓* (mandatory, cannot be omitted, cannot be empty) |
+
+
 
 | SQL Functions             | Supported                   |
 |---------------------------|-----------------------------|
@@ -120,7 +126,7 @@ More to follow later...
  
 
 ## "Parser" / "Syntactic Analysis" generators 
-### Using a "generating parser" is likely easier than doing a parser manually!
+Using a "generating parser" is likely easier than doing a parser manually!
 | Component | Reason | URLs |
 |-----------|--------|------|
 | Goyacc    | Implements parsers in Go, uses industry standard yacc tool     |  Compatible license. Industry standard parser | https://pkg.go.dev/golang.org/x/tools/cmd/goyacc
