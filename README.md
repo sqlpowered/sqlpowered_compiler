@@ -144,7 +144,7 @@ This is essential cleaning and preparation of the input into the "Parser" / "Syn
 > For instance with the input `2 + 22` statement, it would recognise:
 > - the `+` operator in the expression and it's position in the source code
 > - the first `2` expression and it's position in the source code
-> - the second `2` expression and it's position in the source code
+> - the second `22` expression and it's position in the source code
 
 - The output: for the first "`2`" in `2 + 22`
 
