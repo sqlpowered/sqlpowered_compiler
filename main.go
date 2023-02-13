@@ -7,6 +7,17 @@ import (
 	"github.com/bzick/tokenizer"
 )
 
+// TODO: explore Goyacc
+// similar work references:
+// 		https://pkg.go.dev/modernc.org/goyacc
+//		https://github.com/sjjian/oracle-sql-parser
+// 		https://github.com/slrtbtfs/goyacc-tutorial
+//		https://github.com/sjjian/yacc-examples
+// 		https://github.com/monsterxx03/sqlpar
+// 		https://github.com/cdstelly/goyacc-sample
+// 		https://github.com/pingcap/tidb https://github.com/pingcap/tidb/tree/master/parser -- apparently hard to read
+
+// Exploring lexing/tokenising with: github.com/bzick/tokenizer
 func main() {
 
 	// define custom tokens keys
@@ -89,14 +100,4 @@ func main() {
 		log.Print(stream.CurrentToken().Key() == tokenQuotedIdentifier)
 		stream.GoNext()
 	}
-
-
-// TODO: explore Goyacc
-// similar work references:
-// 		https://pkg.go.dev/modernc.org/goyacc
-//		https://github.com/sjjian/oracle-sql-parser
-// 		https://github.com/slrtbtfs/goyacc-tutorial
-//		https://github.com/sjjian/yacc-examples
-// 		https://github.com/monsterxx03/sqlpar
-// 		https://github.com/cdstelly/goyacc-sample
-// 		https://github.com/pingcap/tidb https://github.com/pingcap/tidb/tree/master/parser -- apparently hard to read
+}
