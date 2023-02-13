@@ -136,3 +136,60 @@ Using a "generating parser" is likely easier than doing a parser manually!
 |-----------|--------|------|
 | Goyacc    | Implements parsers in Go, uses industry standard yacc tool     |  Compatible license. Industry standard parser | https://pkg.go.dev/golang.org/x/tools/cmd/goyacc
 
+## What compiler phases must we support?
+### "Lexers" / "Tokenisers"
+These recognise the language keywords, operators, expressions etc in the input.
+This is essential cleaning and preparation of the input into the "Parser" / "Syntactic Analysis" next.
+
+> For instance with the input `2 + 22` statement, it would recognise:
+> - the `+` operator in the expression and it's position in the source code
+> - the first `2` expression and it's position in the source code
+> - the second `2` expression and it's position in the source code
+
+- The output: for the first "`2`" in `2 + 22`
+
+| Loc                       | Value |
+|---------------------------|-------|
+| start: Line 1, Column 1   | "2"   |
+| end:   Line 1, Column 2   |       |
+
+- The output: for the "`+`" in `2 + 22`
+
+| Loc                       | Value |
+|---------------------------|-------|
+| start: Line 1, Column 3   | "+"   |
+| end:   Line 1, Column 4   |       |
+
+- The output: for the "`22`" in `2 + 22`
+
+| Loc                       | Value |
+|---------------------------|-------|
+| start: Line 1, Column 5   | "22"   |
+| end:   Line 1, Column 7   |       |
+
+
+
+### "Parser" / "Syntactic Analysis"
+This understands the language's grammar can tell us about: 
+- If the lexer output ("lexemes") are valid according to our grammar, eg `2`, `+`, `22`
+- The meaning in our language of each type of valid lexer output ("lexeme").
+
+> Running `2 + 22` in https://astexplorer.net/ with the Go language:
+
+- In our example `2` is a `"BasicLit"` or basic literal, of Kind `"INT"`, and the source code location information.
+- In our example `22` is a `"BasicLit"` or basic literal, of Kind `"INT"`, and the source code location information.
+- In our example `+` is a `"BinaryExpr"` or binary expression, with the `Op: "+"` or plus operator, it then lists the two `BasicLit` for `2` and `22` nested underneath, this is how the tree forms, by this nesting, in an abstract syntax tree.
+- `BinaryExpr(Op:"+", X: BasicLit, Y: BasicLit)`
+
+
+This represents the relationship between the different parts of the input, and is called an "abstract syntax tree" (AST). There are some really good examples from: https://astexplorer.net/, check the Go lang example, click on the code on the left and it will show you the entry in the AST on the right, pretty amazing!
+
+### Further stages may be not required (yet)
+Once we have the AST let's evaluate if we can perform the checks we need to:
+- Allowed functions
+- Allowed operators
+- Allowed columns
+- Allowed tables
+
+To simplify things initially we could require that data is referred to like `table_name.column_name` so we can easily verify if the column is allowed from that table for that user. 
+Future work could be to do some more complex work to deduce `table_name`, and throw errors when it is ambiguous. We know the schema of the tables in the API, which enables this sort of check.
